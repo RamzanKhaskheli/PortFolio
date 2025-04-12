@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-cyan': '#5ee6eb',
+                        'custom-dark': '#1a1a1a'
+                    },
+                    screens: {
+                        'xs': '375px',
+                        'sm': '640px',
+                        'md': '768px',
+                        'lg': '1024px',
+                        'xl': '1280px',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .title-gradient {
+            background: linear-gradient(to right, #c5c5c5, #919191);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Hamburger Menu Animation */
+        .hamburger-icon {
+            transition: transform 0.3s ease-in-out;
+            color: currentColor;
+        }
+        .cross-icon {
+            transition: transform 0.3s ease-in-out;
+            transform: scale(0);
+            color: currentColor;
+        }
+        .mobile-menu.active .hamburger-icon {
+            transform: scale(0);
+        }
+        .mobile-menu.active .cross-icon {
+            transform: scale(1);
+        }
+        /* Hero Section Animations */
+        .animate-hero-title,
+        .animate-hero-name,
+        .animate-hero-subtitle,
+        .animate-hero-description,
+        .animate-hero-buttons,
+        .animate-hero-social {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        /* Update navbar transition styles */
+        .nav-scrolled {
+            background-color: #3C3A39;
+            border-bottom: 1px solid rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+        }
+        .nav-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        @media (max-width: 640px) {
+            .mobile-menu {
+                display: none;
+            }
+            .mobile-menu.active {
+                display: flex;
+            }
+        }
+        .moving-text-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+            white-space: nowrap;
+        }
+        .moving-text {
+            display: flex;
+            gap: 40px;
+            font-size: 6rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+        .moving-text span {
+            display: inline-block;
+            padding-right: 40px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        @media (max-width: 768px) {
+            .moving-text {
+                font-size: 4rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .moving-text {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 px-4 sm:px-6 py-4 nav-transition">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-custom-cyan text-xl sm:text-2xl font-semibold">Ramzan.</a>
+            
+            <!-- Mobile Menu Button -->
+            <button class="sm:hidden text-white hover:text-custom-cyan transition-colors duration-300" id="mobile-menu-button">
+                <!-- Hamburger Icon -->
+                <svg class="w-6 h-6 hamburger-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+                <!-- Cross Icon -->
+                <svg class="w-6 h-6 cross-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden sm:flex gap-8">
+                <a href="#portfolio" class="text-white hover:text-custom-cyan transition-colors duration-300">Portfolio</a>
+                <a href="#about" class="text-white hover:text-custom-cyan transition-colors duration-300">About</a>
+                <a href="#contact" class="text-white hover:text-custom-cyan transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu absolute top-full left-0 w-full bg-custom-dark py-4 px-4 sm:hidden">
+            <div class="flex flex-col space-y-4">
+                <a href="#portfolio" class="text-white hover:text-custom-cyan transition-colors duration-300">Portfolio</a>
+                <a href="#about" class="text-white hover:text-custom-cyan transition-colors duration-300">About</a>
+                <a href="#contact" class="text-white hover:text-custom-cyan transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="min-h-screen flex items-center px-4 sm:px-6 pt-20">
+        <div class="max-w-7xl mx-auto w-full">
+            <!-- Hero Content -->
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-12">
+                <!-- Left Content -->
+                <div class="w-full md:w-1/2 space-y-4 sm:space-y-6 text-center md:text-left">
+                    <h1 class="text-4xl xs:text-5xl sm:text-6xl font-bold">
+                        <div class="text-custom-cyan mb-4 animate-hero-title">Hey There. I'm</div>
+                        <div class="typing-text-container h-[80px] sm:h-[100px] flex items-center animate-hero-name">
+                            <div class="typing-text text-custom-cyan text-3xl xs:text-4xl sm:text-5xl"></div>
+                        </div>
+                    </h1>
+                    
+                    <h2 class="text-2xl xs:text-3xl font-light title-gradient animate-hero-subtitle">
+                        Front-End Developer
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto md:mx-0 leading-relaxed animate-hero-description">
+                        I'm a digital enthusiast with 2 years of experience crafting efficient web applications. 
+                        I specialize in React, Node.js, and Next.js, delivering clean, scalable solutions tailored to 
+                        user needs. From building admin panels to integrating AI-driven tools, I thrive on turning 
+                        ideas into reality. Let's collaborate to bring your vision to life!
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 mt-8 animate-hero-buttons">
+                        <a href="assets/MUHAMMAD-RAMZAN.pdf" download="Muhammad_Ramzan_Resume.pdf" class="bg-[#5ee6eb] text-[#1a1a1a] px-8 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all duration-300 text-center">
+                            Download Resume
+                        </a>
+                        <a href="#contact" class="border-2 border-[#5ee6eb] text-[#5ee6eb] px-8 py-3 rounded-full font-semibold hover:bg-[#5ee6eb] hover:text-[#1a1a1a] transition-all duration-300 text-center">
+                            Hire Me
+                        </a>
+                    </div>
+
+                    <div class="flex justify-center md:justify-start gap-6 pt-4 animate-hero-social">
+                        <a href="#" class="text-white hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Content - Profile Image -->
+                <div class="w-full md:w-1/2 flex justify-center items-center animate-hero-image">
+                    <div class="relative w-[280px] xs:w-[320px] sm:w-[400px] md:w-[450px]">
+                        <!-- Dark background with top rounded corners -->
+                        <div class="absolute inset-0 w-[100%] h-[105%] -left-[0%] -top-[5%] bg-[#272A2A] pt-4 rounded-t-[256px]"></div>
+                        <!-- Profile image -->
+                        <img src="images/ramzan.png" alt="Profile" class="relative w-full h-auto object-contain select-none z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Moving Text Section -->
+    <section class="py-12">
+        <div class="space-y-2">
+            <div class="moving-text-container animate-section">
+                <div class="moving-text moving-text-1">
+                    <span>JAVASCRIPT</span>
+                    <span>REACT JS</span>
+                    <span></span>
+                    <span>JAVASCRIPT</span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="moving-text-container animate-section">
+                <div class="moving-text moving-text-2">
+                    <span>COMPONENTS</span>
+                    <span>GSAP</span>
+                    <span>FRAMER M</span>
+                    <span>COMPONENTS</span>
+                    <span>GSAP</span>
+                    <span>FRAMER M</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Work Section -->
+    <section class="py-20 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- Section Title -->
+            <h2 class="text-3xl sm:text-4xl font-bold mb-12 section-title animate-section">MY WORK</h2>
+            
+            <!-- Projects Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project Card 1 -->
+                <div class="group project-card animate-section">
+                    <!-- Project Image Container -->
+                    <div class="relative rounded-[32px] p-6 mb-6 transition-all duration-300 group-hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                            <img src="images/ecom.png" alt="RadixTech Project" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Project Info -->
+                    <div class="bg-[#1E1E1E] rounded-[32px] p-8 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold tracking-wide">E-COMMERCE WEBSITE</h3>
+                            <a href="#" class="text-white hover:text-[#C5E063] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">A platform empowering non-profits with data-driven tools for monitoring, and evaluation. It focuses on AI-driven dashboards, and strategic decision-making.</p>
+                        <!-- Tech Stack -->
+                        <div class="flex gap-3">
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-[#61DAFB]">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
+                                    <path d="M12 22.5c-1.9 0-3.3-.5-4.3-1.4-1-.9-1.4-2.1-1.4-3.4 0-1.4.5-2.9 1.4-4.4.9-1.5 2.1-2.9 3.5-4.2 1.4-1.3 2.9-2.4 4.3-3.3C17 4.9 18.3 4.2 19.4 3.7c1.1-.5 2-.7 2.6-.7.9 0 1.6.3 2 .9.4.6.6 1.4.6 2.4 0 1.4-.5 2.9-1.4 4.4-.9 1.5-2.1 2.9-3.5 4.2-1.4 1.3-2.9 2.4-4.3 3.3-1.5.9-2.8 1.6-3.9 2.1-1.1.5-2 .7-2.6.7ZM22 4c-.5 0-1.2.2-2.2.6-1 .4-2.2 1.1-3.6 1.9-1.4.8-2.8 1.9-4.1 3.1-1.4 1.2-2.5 2.5-3.4 3.9-.9 1.4-1.3 2.7-1.3 3.9 0 1 .3 1.8 1 2.4.7.6 1.8.9 3.3.9.5 0 1.2-.2 2.2-.6 1-.4 2.2-1.1 3.6-1.9 1.4-.8 2.8-1.9 4.1-3.1 1.4-1.2 2.5-2.5 3.4-3.9.9-1.4 1.3-2.7 1.3-3.9 0-1-.3-1.8-1-2.4-.7-.6-1.8-.9-3.3-.9Z"/>
+                                    <path d="M12 22.5c-.9 0-1.6-.3-2-1-.4-.6-.6-1.4-.6-2.4 0-1.4.5-2.9 1.4-4.4.9-1.5 2.1-2.9 3.5-4.2 1.4-1.3 2.9-2.4 4.3-3.3 1.5-.9 2.8-1.6 3.9-2.1 1.1-.5 2-.7 2.6-.7 1.9 0 3.3.5 4.3 1.4 1 .9 1.4 2.1 1.4 3.4 0 1.4-.5 2.9-1.4 4.4-.9 1.5-2.1 2.9-3.5 4.2-1.4 1.3-2.9 2.4-4.3 3.3-1.5.9-2.8 1.6-3.9 2.1-1.1.5-2 .7-2.6.7Zm12-17c-.5 0-1.2.2-2.2.6-1 .4-2.2 1.1-3.6 1.9-1.4.8-2.8 1.9-4.1 3.1-1.4 1.2-2.5 2.5-3.4 3.9-.9 1.4-1.3 2.7-1.3 3.9 0 .8.2 1.4.4 1.8.3.4.7.5 1.2.5.5 0 1.2-.2 2.2-.6 1-.4 2.2-1.1 3.6-1.9 1.4-.8 2.8-1.9 4.1-3.1 1.4-1.2 2.5-2.5 3.4-3.9.9-1.4 1.3-2.7 1.3-3.9 0-1-.3-1.8-1-2.4-.7-.6-1.8-.9-3.3-.9Z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-[#38BDF8]">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-yellow-400">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-white">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="group project-card animate-section">
+                    <!-- Project Image Container -->
+                    <div class="relative rounded-[32px] p-6 mb-6 transition-all duration-300 group-hover:-translate-y-2">
+                        <div class="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                            <img src="images/image.png" alt="fast-food-web-app Project" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Project Info -->
+                    <div class="bg-[#1E1E1E] rounded-[32px] p-8 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold tracking-wide">FOODIE FAST-FOOD-WEB-APP</h3>
+                            <a href="https://foodie-fast-food-website.vercel.app/" target="_blank" class="text-white hover:text-[#C5E063] transition-colors duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">A creative agency specializing in branding, web design, and digital marketing, delivering impactful solutions through innovative strategies.</p>
+                        <!-- Tech Stack -->
+                        <div class="flex gap-3">
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-[#61DAFB]">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 13.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z"/>
+                                    <path d="M12 22.5c-1.9 0-3.3-.5-4.3-1.4-1-.9-1.4-2.1-1.4-3.4 0-1.4.5-2.9 1.4-4.4.9-1.5 2.1-2.9 3.5-4.2 1.4-1.3 2.9-2.4 4.3-3.3C17 4.9 18.3 4.2 19.4 3.7c1.1-.5 2-.7 2.6-.7.9 0 1.6.3 2 .9.4.6.6 1.4.6 2.4 0 1.4-.5 2.9-1.4 4.4-.9 1.5-2.1 2.9-3.5 4.2-1.4 1.3-2.9 2.4-4.3 3.3-1.5.9-2.8 1.6-3.9 2.1-1.1.5-2 .7-2.6.7ZM22 4c-.5 0-1.2.2-2.2.6-1 .4-2.2 1.1-3.6 1.9-1.4.8-2.8 1.9-4.1 3.1-1.4 1.2-2.5 2.5-3.4 3.9-.9 1.4-1.3 2.7-1.3 3.9 0 1 .3 1.8 1 2.4.7.6 1.8.9 3.3.9.5 0 1.2-.2 2.2-.6 1-.4 2.2-1.1 3.6-1.9 1.4-.8 2.8-1.9 4.1-3.1 1.4-1.2 2.5-2.5 3.4-3.9.9-1.4 1.3-2.7 1.3-3.9 0-1-.3-1.8-1-2.4-.7-.6-1.8-.9-3.3-.9Z"/>
+                                    <path d="M12 22.5c-.9 0-1.6-.3-2-1-.4-.6-.6-1.4-.6-2.4 0-1.4.5-2.9 1.4-4.4.9-1.5 2.1-2.9 3.5-4.2 1.4-1.3 2.9-2.4 4.3-3.3 1.5-.9 2.8-1.6 3.9-2.1 1.1-.5 2-.7 2.6-.7 1.9 0 3.3.5 4.3 1.4 1 .9 1.4 2.1 1.4 3.4 0 1.4-.5 2.9-1.4 4.4-.9 1.5-2.1 2.9-3.5 4.2-1.4 1.3-2.9 2.4-4.3 3.3-1.5.9-2.8 1.6-3.9 2.1-1.1.5-2 .7-2.6.7Zm12-17c-.5 0-1.2.2-2.2.6-1 .4-2.2 1.1-3.6 1.9-1.4.8-2.8 1.9-4.1 3.1-1.4 1.2-2.5 2.5-3.4 3.9-.9 1.4-1.3 2.7-1.3 3.9 0 .8.2 1.4.4 1.8.3.4.7.5 1.2.5.5 0 1.2-.2 2.2-.6 1-.4 2.2-1.1 3.6-1.9 1.4-.8 2.8-1.9 4.1-3.1 1.4-1.2 2.5-2.5 3.4-3.9.9-1.4 1.3-2.7 1.3-3.9 0-1-.3-1.8-1-2.4-.7-.6-1.8-.9-3.3-.9Z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-[#38BDF8]">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-yellow-400">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/>
+                                </svg>
+                            </span>
+                            <span class="w-8 h-8 flex items-center justify-center bg-[#2A2A2A] rounded-lg text-white">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M11.572 0c-.176 0-.31.001-.358.007a19.76 19.76 0 0 1-.364.033C7.443.346 4.25 2.185 2.228 5.012a11.875 11.875 0 0 0-2.119 5.243c-.096.659-.108.854-.108 1.747s.012 1.089.108 1.748c.652 4.506 3.86 8.292 8.209 9.695.779.25 1.6.422 2.534.525.363.04 1.935.04 2.299 0 1.611-.178 2.977-.577 4.323-1.264.207-.106.247-.134.219-.158-.02-.013-.9-1.193-1.955-2.62l-1.919-2.592-2.404-3.558a338.739 338.739 0 0 0-2.422-3.556c-.009-.002-.018 1.579-.023 3.51-.007 3.38-.01 3.515-.052 3.595a.426.426 0 0 1-.206.214c-.075.037-.14.044-.495.044H7.81l-.108-.068a.438.438 0 0 1-.157-.171l-.05-.106.006-4.703.007-4.705.072-.092a.645.645 0 0 1 .174-.143c.096-.047.134-.051.54-.051.478 0 .558.018.682.154.035.038 1.337 1.999 2.895 4.361a10760.433 10760.433 0 0 0 4.735 7.17l1.9 2.879.096-.063a12.317 12.317 0 0 0 2.466-2.163 11.944 11.944 0 0 0 2.824-6.134c.096-.66.108-.854.108-1.748 0-.893-.012-1.088-.108-1.747-.652-4.506-3.859-8.292-8.208-9.695a12.597 12.597 0 0 0-2.499-.523A33.119 33.119 0 0 0 11.573 0zm4.069 7.217c.347 0 .408.005.486.047a.473.473 0 0 1 .237.277c.018.06.023 1.365.018 4.304l-.006 4.218-.744-1.14-.746-1.14v-3.066c0-1.982.01-3.097.023-3.15a.478.478 0 0 1 .233-.296c.096-.05.13-.054.5-.054z"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-[#1E1E1E] py-12 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Info -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">Get in Touch</h3>
+                    <div class="space-y-2">
+                        <a href="mailto:ramzan@example.com" class="block text-gray-400 hover:text-custom-cyan transition-colors duration-300">Email: ramzan@example.com</a>
+                        <p class="text-gray-400">Phone: +92 123 456 7890</p>
+                        <p class="text-gray-400">Location: Karachi, Pakistan</p>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">Quick Links</h3>
+                    <div class="space-y-2">
+                        <a href="#portfolio" class="block text-gray-400 hover:text-custom-cyan transition-colors duration-300">Portfolio</a>
+                        <a href="#about" class="block text-gray-400 hover:text-custom-cyan transition-colors duration-300">About</a>
+                        <a href="#contact" class="block text-gray-400 hover:text-custom-cyan transition-colors duration-300">Contact</a>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-white">Connect With Me</h3>
+                    <div class="flex gap-4">
+                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-custom-cyan transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center">
+                <p class="text-gray-400">© 2024 Muhammad Ramzan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
