@@ -53,57 +53,6 @@ const Skills = () => {
         });
     }, { scope: containerRef });
 
-    const skills = [
-        {
-            name: "HTML5",
-            percentage: 95,
-            color: "from-orange-400 to-orange-600",
-            icon: <SiHtml5 className="w-10 h-10 text-orange-500" />
-        },
-        {
-            name: "CSS3",
-            percentage: 90,
-            color: "from-blue-400 to-blue-600",
-            icon: <SiCss3 className="w-10 h-10 text-blue-500" />
-        },
-        {
-            name: "JavaScript",
-            percentage: 85,
-            color: "from-yellow-400 to-yellow-600",
-            icon: <SiJavascript className="w-10 h-10 text-yellow-500" />
-        },
-        {
-            name: "React.js",
-            percentage: 90,
-            color: "from-cyan-400 to-cyan-600",
-            icon: <SiReact className="w-10 h-10 text-cyan-500" />
-        },
-        {
-            name: "Node.js",
-            percentage: 80,
-            color: "from-green-400 to-green-600",
-            icon: <SiNodedotjs className="w-10 h-10 text-green-500" />
-        },
-        {
-            name: "PHP",
-            percentage: 85,
-            color: "from-indigo-400 to-indigo-600",
-            icon: <SiPhp className="w-10 h-10 text-indigo-500" />
-        },
-        {
-            name: "MySQL",
-            percentage: 80,
-            color: "from-blue-500 to-blue-700",
-            icon: <SiMysql className="w-10 h-10 text-blue-600" />
-        },
-        {
-            name: "Git",
-            percentage: 90,
-            color: "from-red-400 to-red-600",
-            icon: <SiGit className="w-10 h-10 text-red-500" />
-        }
-    ];
-
     return (
         <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300" ref={containerRef}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -154,5 +103,56 @@ const Skills = () => {
         </section>
     );
 };
+
+const skills = [
+    {
+        name: "HTML5",
+        percentage: 95,
+        color: "from-orange-400 to-orange-600",
+        icon: <SiHtml5 className="w-10 h-10 text-orange-500" />
+    },
+    {
+        name: "CSS3",
+        percentage: 90,
+        color: "from-blue-400 to-blue-600",
+        icon: <SiCss3 className="w-10 h-10 text-blue-500" />
+    },
+    {
+        name: "JavaScript",
+        percentage: 85,
+        color: "from-yellow-400 to-yellow-600",
+        icon: <SiJavascript className="w-10 h-10 text-yellow-500" />
+    },
+    {
+        name: "React.js",
+        percentage: 90,
+        color: "from-cyan-400 to-cyan-600",
+        icon: <SiReact className="w-10 h-10 text-cyan-500" />
+    },
+    {
+        name: "Node.js",
+        percentage: 80,
+        color: "from-green-400 to-green-600",
+        icon: <SiNodedotjs className="w-10 h-10 text-green-500" />
+    },
+    {
+        name: "PHP",
+        percentage: 85,
+        color: "from-indigo-400 to-indigo-600",
+        icon: <SiPhp className="w-10 h-10 text-indigo-500" />
+    },
+    {
+        name: "MySQL",
+        percentage: 80,
+        color: "from-blue-500 to-blue-700",
+        icon: <SiMysql className="w-10 h-10 text-blue-600" />
+    },
+    {
+        name: "Git",
+        percentage: 90,
+        color: "from-red-400 to-red-600",
+        icon: <SiGit className="w-10 h-10 text-red-500" />
+    }
+];
 
 export default Skills;
