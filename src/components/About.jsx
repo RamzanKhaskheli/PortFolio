@@ -16,10 +16,7 @@ const About = () => {
                                 className="relative rounded-xl shadow-2xl w-full object-cover h-[500px]"
                             />
 
-                            <div className="absolute bottom-8 right-8 bg-white dark:bg-gray-900 p-6 rounded-xl shadow-xl max-w-xs">
-                                <p className="text-4xl font-bold text-primary mb-2">3+</p>
-                                <p className="text-gray-600 dark:text-gray-300 font-medium">Years of Experience in Web Development</p>
-                            </div>
+                           
                         </div>
                     </div>
 
@@ -47,7 +44,7 @@ const About = () => {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm text-gray-500 dark:text-gray-400 mb-1">Address</span>
-                                    <span className="font-semibold text-gray-900 dark:text-white">Pakistan</span>
+                                    <span className="font-semibold text-gray-900 dark:text-white">Karachi , Pakistan</span>
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm text-gray-500 dark:text-gray-400 mb-1">Phone</span>

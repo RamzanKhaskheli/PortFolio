@@ -82,7 +82,7 @@ const Contact = () => {
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Location</h3>
-                                <p className="text-gray-600 dark:text-gray-400 mb-1">Currently working remotely.</p>
+                                <p className="text-gray-600 dark:text-gray-400 mb-1"></p>
                                 <span className="text-primary font-semibold">
                                     Pakistan
                                 </span>

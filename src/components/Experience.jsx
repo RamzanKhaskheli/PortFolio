@@ -30,47 +30,40 @@ const Experience = () => {
 
     const experiences = [
         {
-            title: "Senior PHP Developer",
-            company: "UTECHO",
-            period: "2023 - Current",
-            description: "Responsible for handling various projects using core PHP, Socket.io and MySQL. My main project has been the VMS (Vehicle Management System), which has been a significant part of my experience.",
+            title: "WordPress Intern",
+            company: "Hidaya Trust",
+            period: "June-2025 - Sept-2025",
+            description: "Responsible for handling variousGained practical experience in WordPress development, including theme customization, plugin integration, and optimizing websites for better performance and user experience.",
             type: "work"
         },
         {
             title: "Web Courses Instructor",
-            company: "SERVING SOL",
-            period: "2021 - Current",
+            company: "Right Solutions",
+            period: "OCT-2025 - Current",
             description: "Teaching and guiding students in various aspects of web development, including front-end and back-end technologies, programming languages, frameworks, and best practices.",
-            type: "work"
-        },
-        {
-            title: "Senior PHP DEVELOPER",
-            company: "EVISION",
-            period: "2022 - 2023",
-            description: "Responsible for a range of tasks related to the development of software applications. I utilized my expertise in the CodeIgniter framework to develop software applications.",
             type: "work"
         }
     ];
 
     const education = [
         {
-            title: "Bachelor of Computer Science",
-            institution: "GCUF",
-            period: "2018 - 2022",
-            grade: "CGPA: 3.64",
+            title: "Bachelor Of Information Technology",
+            institution: "University Of Sindh Jamshoro",
+            period: "2021 - 2024",
+            grade: "CGPA: 3.40",
             type: "education"
         },
         {
-            title: "Intermediate of Computer Science",
-            institution: "SUPERIOR COLLEGE",
-            period: "2016 - 2018",
-            grade: "Grade : B",
+            title: "Intermediate of  Pre-Engineering",
+            institution: "ROYAL COLLEGE UMERKOT",
+            period: "2018 - 2020",
+            grade: "Grade : A+",
             type: "education"
         },
         {
             title: "Matriculation In Science",
-            institution: "BLESSIGN HOME SCHOOL",
-            period: "2011 - 2016",
+            institution: "KAINAAT SCHOOL UMERKOT",
+            period: "2016 - 2018",
             grade: "Grade : A+",
             type: "education"
         }

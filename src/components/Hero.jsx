@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { SiReact, SiNodedotjs } from 'react-icons/si';
+import { SiReact, SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si';
 import profileImage from '../assets/ramzan.png';
 
 const Hero = () => {
@@ -79,11 +79,11 @@ const Hero = () => {
                             Muhammad <span className="text-primary">Ramzan!</span>
                         </h1>
                         <h2 className="hero-title text-lg sm:text-2xl lg:text-3xl font-bold text-gray-700 dark:text-gray-300 mb-4 sm:mb-6">
-                            Full Stack Developer | <span className="text-primary">React</span> | <span className="text-blue-600 dark:text-blue-400">Tailwind</span>
+                            Full Stack Developer | <span className="text-primary">PHP</span> | <span className="text-blue-600 dark:text-blue-400">WordPress</span>
                         </h2>
                         <p className="hero-desc text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-400 mb-4 sm:mb-6 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                            Harnessing the power of technology to propel businesses to new heights through dynamic and forward-looking web development.
-                        </p>
+                            I am a MERN Stack Developer focused on building modern, responsive, and scalable web applications.
+                            I combine clean frontend UI with optimized backend APIs to deliver complete full-stack solutions.</p>
 
                         <div className="flex flex-col gap-4 items-center lg:items-start">
                             <Link
@@ -133,6 +133,12 @@ const Hero = () => {
                             </div>
                             <div className="floating-icon absolute bottom-12 sm:bottom-20 -right-3 sm:-right-4 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg flex items-center justify-center">
                                 <SiNodedotjs className="w-8 h-8 sm:w-10 sm:h-10 text-green-500" />
+                            </div>
+                            <div className="floating-icon absolute top-6 sm:top-10 -right-3 sm:-right-4 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg flex items-center justify-center">
+                                <SiExpress className="w-8 h-8 sm:w-10 sm:h-10 text-gray-700 dark:text-gray-300" />
+                            </div>
+                            <div className="floating-icon absolute bottom-12 sm:bottom-20 -left-3 sm:-left-4 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg sm:rounded-xl shadow-lg flex items-center justify-center">
+                                <SiMongodb className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
                             </div>
 
 

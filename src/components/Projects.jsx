@@ -8,16 +8,16 @@ const projects = [
         link: '#',
     },
     {
-        title: 'Task Management App',
-        description: 'A productivity tool for managing daily tasks and projects.',
-        image: 'https://images.unsplash.com/photo-1540350394557-8d14678e7f91?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-        link: '#',
+        title: 'PopCornPlay (Movie App)',
+        description: 'PopCornPlay is a modern movie app that lets users explore, search, and stream details of trending films and series.',
+        image: 'https://plus.unsplash.com/premium_photo-1710324884987-7c67e9986713?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        link: 'https://github.com/RamzanKhaskheli/PopcornPlay--1',
     },
     {
-        title: 'Weather Dashboard',
+        title: 'Gemini CLone',
         description: 'Real-time weather application using OpenWeatherMap API.',
-        image: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-        link: '#',
+        image: 'https://images.unsplash.com/photo-1738107445847-b242992a50a4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        link: 'https://gimini-clone-flax.vercel.app/',
     },
 ];
 
@@ -48,6 +48,7 @@ const Projects = () => {
                                     <a
                                         href={project.link}
                                         className="inline-flex items-center text-white font-semibold hover:text-primary transition-colors"
+                                        target='_blank'
                                     >
                                         View Project
                                         <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

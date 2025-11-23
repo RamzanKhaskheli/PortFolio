@@ -29,13 +29,13 @@ const ThemeToggle = () => {
     return (
         <button
             onClick={toggleTheme}
-            className="fixed right-2 top-1/2 -translate-y-1/2 z-50 p-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-300 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg"
+            className="fixed right-0 top-1/2 -translate-y-1/2 z-50 p-3 rounded-l-lg rounded-r-none bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-300 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg"
             aria-label="Toggle Dark Mode"
         >
             {theme === 'light' ? (
-                <FaMoon className="w-6 h-6" />
+                <FaMoon className="w-4 h-4" />
             ) : (
-                <FaSun className="w-6 h-6" />
+                <FaSun className="w-4 h-4" />
             )}
         </button>
     );
