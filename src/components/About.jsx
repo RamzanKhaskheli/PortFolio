@@ -51,11 +51,11 @@ const About = () => {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm text-gray-500 dark:text-gray-400 mb-1">Phone</span>
-                                    <span className="font-semibold text-gray-900 dark:text-white">+92 300 1234567</span>
+                                    <span className="font-semibold text-gray-900 dark:text-white">+92 348 3282791</span>
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm text-gray-500 dark:text-gray-400 mb-1">Email</span>
-                                    <span className="font-semibold text-gray-900 dark:text-white">ramzan@example.com</span>
+                                    <span className="font-semibold text-gray-900 dark:text-white">mramzankhaskheli7@gmail.com</span>
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-sm text-gray-500 dark:text-gray-400 mb-1">Freelance</span>

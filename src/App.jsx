@@ -1,13 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useState, lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
+
 import Lenis from 'lenis';
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Preloader from './components/Preloader';
+import ThemeToggle from './components/ThemeToggle';
 
 // Lazy load components
+const Home = lazy(() => import('./components/Home'));
 const Hero = lazy(() => import('./components/Hero'));
 const About = lazy(() => import('./components/About'));
 const Experience = lazy(() => import('./components/Experience'));
@@ -25,17 +28,6 @@ const LoadingFallback = () => (
 
 function AppContent() {
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // md breakpoint
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Initialize Lenis
   useEffect(() => {
@@ -62,26 +54,10 @@ function AppContent() {
     };
   }, []);
 
-  // On desktop, always show all sections regardless of route
-  if (!isMobile) {
-    return (
-      <Suspense fallback={<LoadingFallback />}>
-        <Hero />
-        <About />
-        <Experience />
-        <Skills />
-        <Services />
-        <Projects />
-        <Contact />
-      </Suspense>
-    );
-  }
-
-  // On mobile, use routes
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
-        <Route path="/" element={<Hero />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/experience" element={<Experience />} />
         <Route path="/skills" element={<Skills />} />
@@ -103,6 +79,7 @@ function App() {
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans flex flex-col transition-colors duration-300">
         {loading && <Preloader onComplete={() => setLoading(false)} />}
         {!loading && <Navbar />}
+        <ThemeToggle />
         <main className="flex-grow">
           <AppContent />
         </main>

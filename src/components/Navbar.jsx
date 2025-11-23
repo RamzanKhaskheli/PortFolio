@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [activeSection, setActiveSection] = useState('/');
     const location = useLocation();
 
     useEffect(() => {
@@ -44,16 +44,85 @@ const Navbar = () => {
         };
     }, [isOpen]);
 
-    const isActive = (path) => location.pathname === path;
+    // Scroll Spy - Track active section on desktop
+    useEffect(() => {
+        if (isMobile || location.pathname !== '/') return;
+
+        const sections = document.querySelectorAll('section[id]');
+        let currentActive = '/';
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                // Find the section with the highest intersection ratio
+                let maxRatio = 0;
+                let activeEntry = null;
+
+                entries.forEach((entry) => {
+                    if (entry.intersectionRatio > maxRatio) {
+                        maxRatio = entry.intersectionRatio;
+                        activeEntry = entry;
+                    }
+                });
+
+                if (activeEntry && activeEntry.isIntersecting) {
+                    const sectionId = activeEntry.target.getAttribute('id');
+                    // Map section IDs to paths
+                    const pathMap = {
+                        'home': '/',
+                        'about': '/about',
+                        'experience': '/experience',
+                        'skills': '/skills',
+                        'services': '/services',
+                        'projects': '/projects',
+                        'contact': '/contact'
+                    };
+                    const newActive = pathMap[sectionId] || '/';
+                    if (newActive !== currentActive) {
+                        currentActive = newActive;
+                        setActiveSection(newActive);
+                    }
+                }
+            },
+            {
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0], // Multiple thresholds for better tracking
+                rootMargin: '-100px 0px -60% 0px' // Adjust for navbar height and keep active longer
+            }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            sections.forEach((section) => observer.unobserve(section));
+        };
+    }, [isMobile, location.pathname]);
+
+    const isActive = (path) => {
+        // On home page with desktop, use scroll-spy active section
+        if (location.pathname === '/' && !isMobile) {
+            return activeSection === path;
+        }
+        // Otherwise, use route-based active state
+        return location.pathname === path;
+    };
 
     const navLinks = [
         { name: 'Home', path: '/', hash: '#home' },
         { name: 'About', path: '/about', hash: '#about' },
-      
         { name: 'Services', path: '/services', hash: '#services' },
         { name: 'Portfolio', path: '/projects', hash: '#projects' },
         { name: 'Contact', path: '/contact', hash: '#contact' },
     ];
+
+    const handleNavClick = (e, hash) => {
+        if (location.pathname === '/' && !isMobile) {
+            e.preventDefault();
+            const element = document.querySelector(hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        setIsOpen(false);
+    };
 
     return (
         <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'md:bg-white/95 md:dark:bg-gray-900/95 md:backdrop-blur-md md:shadow-sm' : 'bg-transparent'}`}>
@@ -72,25 +141,19 @@ const Navbar = () => {
                     <div className="hidden md:flex items-center gap-8">
                         <div className="flex items-baseline space-x-8">
                             {navLinks.map((link) => (
-                                isMobile ? (
-                                    <Link
-                                        key={link.name}
-                                        to={link.path}
-                                        className="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300 relative group"
-                                    >
-                                        {link.name}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                                    </Link>
-                                ) : (
-                                    <a
-                                        key={link.name}
-                                        href={link.hash}
-                                        className="text-base font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors duration-300 relative group"
-                                    >
-                                        {link.name}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
-                                )
+                                <Link
+                                    key={link.name}
+                                    to={link.path}
+                                    onClick={(e) => handleNavClick(e, link.hash)}
+                                    className={`text-base font-medium transition-colors duration-300 relative group ${isActive(link.path)
+                                        ? 'text-primary dark:text-primary'
+                                        : 'text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary'
+                                        }`}
+                                >
+                                    {link.name}
+                                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${isActive(link.path) ? 'w-full' : 'w-0 group-hover:w-full'
+                                        }`}></span>
+                                </Link>
                             ))}
                         </div>
                         <a
@@ -99,7 +162,7 @@ const Navbar = () => {
                         >
                             Download CV
                         </a>
-                        <ThemeToggle />
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -165,7 +228,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     to={link.path}
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => handleNavClick(e, link.hash)}
                                     className="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary hover:bg-orange-50 dark:hover:bg-gray-800 transition-colors duration-200"
                                 >
                                     {link.name}
@@ -181,17 +244,11 @@ const Navbar = () => {
                         >
                             Download CV
                         </a>
-
-                        {/* Theme Toggle */}
-                        <div className="mt-6 flex justify-center">
-                            <ThemeToggle />
-                        </div>
                     </div>
                 </div>
             </div>
         </nav>
     );
-
 };
 
 export default Navbar;

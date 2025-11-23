@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Elms+Sans:ital,wght@0,100..900;1,100..900&family=Outfit:wght@100..900&family=Plus+Jakarta+Sans&display=swap');
+@config "../tailwind.config.js";
 
 @theme {
   --font-sans: 'Outfit', 'Plus Jakarta Sans', sans-serif;
@@ -39,27 +40,6 @@
       transform: translateY(-20px);
     }
   }
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-  /* Account for fixed navbar */
-}
-
-body {
-  background-color: #111827;
-  color: #ffffff;
-}
-
-/* Ensure dark class is applied for Tailwind dark: variants if needed */
-html.dark body {
-  background-color: #111827;
-  color: #ffffff;
-}
-
-.animation-delay-2000 {
-  animation-delay: 2s;
 }
 
 .animation-delay-4000 {
