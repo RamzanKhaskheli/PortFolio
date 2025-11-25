@@ -37,11 +37,11 @@ const Projects = () => {
                         <div key={index} className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer">
                             <div className="relative h-72 w-full overflow-hidden">
                                 <img
-                                    className="h-full w-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    className="h-full w-full object-cover transform md:group-hover:scale-110 transition-transform duration-500"
                                     src={project.image}
                                     alt={project.title}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                                     <span className="text-primary font-bold text-sm mb-2 uppercase tracking-wider">Web Application</span>
                                     <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
                                     <p className="text-gray-300 text-sm mb-4 line-clamp-2">{project.description}</p>

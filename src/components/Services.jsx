@@ -104,21 +104,21 @@ const Services = () => {
                                 {/* Decorative Strip & Icon Container */}
                                 <div className="relative mb-6">
                                     {/* Light Colored Strip */}
-                                    <div className={`absolute top-0 left-8 w-16 h-24 -mt-0 ${index === 0 ? 'bg-emerald-100/50 dark:bg-emerald-900/20' :
-                                            index === 1 ? 'bg-orange-100/50 dark:bg-orange-900/20' :
-                                                index === 2 ? 'bg-blue-100/50 dark:bg-blue-900/20' :
-                                                    index === 3 ? 'bg-purple-100/50 dark:bg-purple-900/20' :
-                                                        index === 4 ? 'bg-pink-100/50 dark:bg-pink-900/20' :
-                                                            'bg-indigo-100/50 dark:bg-indigo-900/20'
+                                    <div className={`absolute top-0 left-8 w-16 h-24 -mt-0 ${index === 0 ? 'bg-emerald-100 dark:bg-emerald-900/70' :
+                                        index === 1 ? 'bg-orange-100 dark:bg-orange-900/70' :
+                                            index === 2 ? 'bg-blue-100 dark:bg-blue-900/70' :
+                                                index === 3 ? 'bg-purple-100 dark:bg-purple-900/70' :
+                                                    index === 4 ? 'bg-pink-100 dark:bg-pink-900/70' :
+                                                        'bg-indigo-100 dark:bg-indigo-900/70'
                                         }`}></div>
 
                                     {/* Icon Circle */}
                                     <div className={`relative top-10 w-20 h-20 rounded-full flex items-center justify-center shadow-lg mx-6 ${index === 0 ? 'bg-emerald-400' :
-                                            index === 1 ? 'bg-orange-500' :
-                                                index === 2 ? 'bg-blue-600' :
-                                                    index === 3 ? 'bg-purple-500' :
-                                                        index === 4 ? 'bg-pink-500' :
-                                                            'bg-indigo-500'
+                                        index === 1 ? 'bg-orange-500' :
+                                            index === 2 ? 'bg-blue-600' :
+                                                index === 3 ? 'bg-purple-500' :
+                                                    index === 4 ? 'bg-pink-500' :
+                                                        'bg-indigo-500'
                                         }`}>
                                         {service.icon}
                                     </div>
@@ -137,11 +137,11 @@ const Services = () => {
                                 {/* Read More Link */}
                                 <div className="mt-auto">
                                     <a href="#" className={`inline-flex items-center font-bold tracking-wide transition-all duration-300 ${index === 0 ? 'text-emerald-400' :
-                                            index === 1 ? 'text-orange-500' :
-                                                index === 2 ? 'text-blue-600' :
-                                                    index === 3 ? 'text-purple-500' :
-                                                        index === 4 ? 'text-pink-500' :
-                                                            'text-indigo-500'
+                                        index === 1 ? 'text-orange-500' :
+                                            index === 2 ? 'text-blue-600' :
+                                                index === 3 ? 'text-purple-500' :
+                                                    index === 4 ? 'text-pink-500' :
+                                                        'text-indigo-500'
                                         }`}>
                                         <span className="w-2 h-2 mr-2 bg-current"></span>
                                         Read More
